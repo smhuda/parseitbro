@@ -1,0 +1,33 @@
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <h1>Analysis of {{ filename }} with {{ df|length }} entries</h1>
+        <div class="row">
+            <div class="col">
+                <h4>Browsers &amp; OS</h4>
+                {{ browsers_table.to_html(classes='table') }}
+                <h4>Top 5 Unique Private IPs - {{ ip1_table|length }} unique</h4>
+                {{ ip1_table.head(5).to_html(classes='table') }}
+                <h4>Top 5 Unique Public IPs - {{ ip2_table|length }} unique</h4>
+                {{ ip2_table.head(5).to_html(classes='table') }}
+                <h4>Ports used</h4>
+                {{ port_table.to_html(classes='table') }}
+            </div>
+            <div class="col">
+                <h4>Hosts - {{ host_table|length }} unique</h4>
+                <h6>Top 5</h6>
+                {{ host_table.head(5).to_html(classes='table') }}
+                <h6>Bottom 5</h6>
+                {{ host_table.tail(5).to_html(classes='table') }}                
+                <h4>Content Types - {{ content_type_table|length }}</h4>
+                {{ content_type_table.to_html(classes='table') }}
+            </div>
+        </div>
+        <div class="row" style="overflow-x: scroll;">
+            <h4>Random sample of 5 entries</h4>
+            {{ df.sample(5, random_state=0).to_html(classes='table') }}
+    </div>
+</body>
