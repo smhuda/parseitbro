@@ -17,3 +17,5 @@ python parseitbro.py
 
 ## Want to know more about this project?
 I have written a full lenght project description describing how I created it and how it exactly works. If it interests you, you can read up on the project [here](https://smhuda.com/projects/bro-log-parsing-and-analysis)
+
+[![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](http://perso.crans.org/besson/LICENSE.html)
