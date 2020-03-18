@@ -1,27 +1,40 @@
+#
+#title           :Parse it bro!
+#description     :This script parses Bro IDS logs to a beautiful HTML format
+#author          :Syed Huda
+#date            :14-03-2020
+#version         :0.1    
+#usage		     :python parseitbro.py
+#notes           :pip install pandas
+#bash            :5.0.16(1)-release
+#==============================================================================
+
 import pandas as pd
 import datetime
-from ipaddress import ip_address
-from jinja2 import Environment, FileSystemLoader
+from ipaddress
+import ip_address
+from jinja2
+import Environment, FileSystemLoader
 
 # Use current date and time module
 now = datetime.datetime.now()
 x = now.strftime("%Y-%m-%d %H:%M:%S")
-print "\n"                                                                
-print "##########      Author: Syed Huda      ##########"          
+print "\n"
+print "##########      Author: Syed Huda      ##########"
 print "##########      Script: Parse it bro!  ##########"
 print "##########      Version: v0.1          ##########"
-print '---------\t'+x
-print "\n"
-# Settings
+print '---------\t' + x
+print "\n"#
+Settings
 LOGFILE_NAME = file(raw_input("Enter filename: "), 'r')
-OUTPUT_REPORT = x+ '_report.html'
+OUTPUT_REPORT = x + '_report.html'
 
 # Get report template
-templates = Environment(loader=FileSystemLoader('.'))
+templates = Environment(loader = FileSystemLoader('.'))
 report_template = templates.get_template('report_template.html')
 
-# Load tab delimited logfile ignoring lines starting with a #
-df = pd.read_csv(LOGFILE_NAME, delimiter='\t', header=None, comment='#', encoding='utf-8')
+# Load tab delimited logfile ignoring lines starting with a#
+df = pd.read_csv(LOGFILE_NAME, delimiter = '\t', header = None, comment = '#', encoding = 'utf-8')
 
 # Gather stats
 content_types = df[26].value_counts()
@@ -33,18 +46,18 @@ ports = df[5].value_counts()
 
 # Pass stats to template to render and write to output file
 report_template.stream(
-    filename=LOGFILE_NAME,
-    df=df,
-    browsers_table=browser_os.to_frame('count'),
-    ip1_table=ips1.to_frame('count'),
-    ip2_table=ips2.to_frame('count'),
-    port_table=ports.to_frame('count'),
-    host_table=hosts.to_frame('count'),
-    content_type_table=content_types.to_frame('count')
+   filename = LOGFILE_NAME,
+   df = df,
+   browsers_table = browser_os.to_frame('count'),
+   ip1_table = ips1.to_frame('count'),
+   ip2_table = ips2.to_frame('count'),
+   port_table = ports.to_frame('count'),
+   host_table = hosts.to_frame('count'),
+   content_type_table = content_types.to_frame('count')
 ).dump(OUTPUT_REPORT)
 print "\n"
 print "Processing......."
 print "Still processing......."
 print "\n"
-print "File: [["+OUTPUT_REPORT+ "]] has been parsed successfully!"
-print "-------------------------------" 
+print "File: [[" + OUTPUT_REPORT + "]] has been parsed successfully!"
+print "-------------------------------"
